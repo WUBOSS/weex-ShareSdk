@@ -25,21 +25,25 @@ WX_EXPORT_METHOD(@selector(share:callback:))
     self.callBack = callback;
     if(![param objectForKey:@"WeiXinAppKey"])
     {
+        if(self.callBack)
         self.callBack(@{@"status":@"error",@"msg":@"微信WeiXinAppKey参数没有"},YES);
       
     }
     if(![param objectForKey:@"WeiXinAppSecret"])
     {
+        if(self.callBack)
         self.callBack(@{@"status":@"error",@"msg":@"微信WeiXinAppSecret参数没有"},YES);
      
     }
     if(![param objectForKey:@"QQAppKey"])
     {
+        if(self.callBack)
         self.callBack(@{@"status":@"error",@"msg":@"QQAppKey参数没有"},YES);
       
     }
     if(![param objectForKey:@"QQAppSecret"])
     {
+        if(self.callBack)
         self.callBack(@{@"status":@"error",@"msg":@"QQAppSecret参数没有"},YES);
         
     }
@@ -96,23 +100,13 @@ WX_EXPORT_METHOD(@selector(share:callback:))
                        switch (state) {
                            case SSDKResponseStateSuccess:
                            {
-                               UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"分享成功"
-                                                                                   message:nil
-                                                                                  delegate:nil
-                                                                         cancelButtonTitle:@"确定"
-                                                                         otherButtonTitles:nil];
-                               [alertView show];
+                               if(self.callBack)
                                callback(@{@"status":@"success"});
                                break;
                            }
                            case SSDKResponseStateFail:
                            {
-                               UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"分享失败"
-                                                                               message:[NSString stringWithFormat:@"%@",error]
-                                                                              delegate:nil
-                                                                     cancelButtonTitle:@"OK"
-                                                                     otherButtonTitles:nil, nil];
-                               [alert show];
+                               if(self.callBack)
                                 callback(@{@"status":@"error",@"msg":[NSString stringWithFormat:@"%@",error]});
                                break;
                            }

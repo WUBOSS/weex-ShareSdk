@@ -21,7 +21,7 @@ weex-ShareSdk是一个weex分享插件， 可以通过weexpack快速集成，可
   ```
 - 添加插件
   ```
-  weexpack plugin add weex-ShareSdk
+  weexpack plugin add weex-sharesdk
   ```
 # 项目地址
 [github](https://github.com/WUBOSS/weex-ShareSdk.git)
@@ -30,7 +30,7 @@ weex-ShareSdk是一个weex分享插件， 可以通过weexpack快速集成，可
 ## iOS集成插件WeexShareSdk
 - 命令行集成
   ```
-  weexpack plugin add weex-ShareSdk
+  weexpack plugin add weex-sharesdk
   ```
 - 手动集成
   在podfile 中添加
@@ -38,6 +38,9 @@ weex-ShareSdk是一个weex分享插件， 可以通过weexpack快速集成，可
   pod 'WeexShareSdk'
   ```
 - api
+```
+    ios项目中要配置对应的url scheme 和白名单
+```
 ```javascript
 
 

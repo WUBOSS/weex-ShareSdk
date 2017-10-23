@@ -31,5 +31,5 @@ Pod::Spec.new do |s|
   s.dependency "ShareSDK3/ShareSDKPlatforms/SinaWeibo"
   s.dependency "ShareSDK3/ShareSDKPlatforms/WeChat"
   s.dependency "ShareSDK3"
-   s.dependency "ShareSDK3/ShareSDKUI"
+  s.dependency "ShareSDK3/ShareSDKUI"
 end
