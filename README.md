@@ -60,6 +60,12 @@ WXShareModule.share({"title":"weex","text":"测试","url":"https://www.baidu.com
                     duration: 0.7
                 })
             });
+// ret {"status":"cancel","msg":"取消"}
+
+//status: success 成功 error:错误 cancel:取消
+//msg:错误信息
+
+
 
 ```
 
