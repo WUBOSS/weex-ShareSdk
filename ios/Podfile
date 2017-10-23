@@ -1,0 +1,19 @@
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '7.0'
+#inhibit_all_warnings!
+
+def common
+	pod 'WeexSDK'
+	pod 'WeexPluginLoader'
+	pod 'ShareSDK3/ShareSDKPlatforms/QQ'
+	pod 'ShareSDK3/ShareSDKPlatforms/SinaWeibo'
+	pod 'ShareSDK3/ShareSDKPlatforms/WeChat'
+	pod 'ShareSDK3'
+	pod 'ShareSDK3/ShareSDKUI'
+end
+
+target 'WeexShareSdk' do
+    common
+end
+
+
