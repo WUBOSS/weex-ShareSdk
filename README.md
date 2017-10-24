@@ -39,7 +39,7 @@ weex-ShareSdk是一个weex分享插件， 可以通过weexpack快速集成，可
   ```
 - api
 ```
-    ios项目中要配置对应的url scheme 和白名单
+    ios项目中要配置对应的url scheme 和白名单 MOBAppKey和MOBAppSecret
 ```
 ```javascript
 
