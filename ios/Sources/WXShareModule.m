@@ -20,6 +20,32 @@
 WX_PlUGIN_EXPORT_MODULE(weexShareSdk, WXShareModule)
 WX_EXPORT_METHOD(@selector(registerSDK:callback:))
 WX_EXPORT_METHOD(@selector(share:callback:))
+WX_EXPORT_METHOD(@selector(getUserInfo:callback:))
+- (void)getUserInfo:(NSString *)param callback:(WXModuleCallback)callback
+{
+    [ShareSDK getUserInfo:param.intValue
+           onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error) {
+               if(state==SSDKResponseStateSuccess)
+               {
+                   
+                   callback(@{@"state":@(state),@"user":user.rawData});
+                   
+               }
+               else if (state==SSDKResponseStateFail)
+              
+               {
+                   callback(@{@"state":@(state),@"error":error.userInfo
+                              });
+               }
+               
+               else if (state==SSDKResponseStateCancel)
+               {
+                   callback(@{@"state":@(state),@"error":error.userInfo});
+               }
+               
+               
+           }];
+}
 - (void)registerSDK:(NSDictionary *)param callback:(WXModuleKeepAliveCallback)callback
 {
     self.callBack = callback;
@@ -86,7 +112,7 @@ WX_EXPORT_METHOD(@selector(share:callback:))
         
         NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
         [shareParams SSDKSetupShareParamsByText:[param objectForKey:@"text"]
-                                         images:nil
+                                         images:[UIImage imageNamed:[param objectForKey:@"image"]]
                                             url:[NSURL URLWithString:[param objectForKey:@"url"]]
                                           title:[param objectForKey:@"title"]
                                            type:SSDKContentTypeAuto];
