@@ -1,6 +1,6 @@
 {
     "name": "weex-sharesdk",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "main": "./js/build/main.js",
     "description": "weex-ShareSdk extend for weex",
     "license": "Apache-2.0",
@@ -13,7 +13,7 @@
         "//": "安装类型为pod",
         "type": "pod",
         "name": "WeexShareSdk",
-        "version": "0.0.2"
+        "version": "0.0.4"
     },
     "android": {
         "//": "安装类型为maven",
