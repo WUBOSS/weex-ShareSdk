@@ -10,6 +10,8 @@ def common
     pod 'ATSDK-Weex', '0.0.1'
     pod 'WeexShareSdk', :path=>'../../'
     pod 'WeexPluginLoader'
+    pod 'WeexWXPay'
+    
 end
 
 target 'WeexDemo' do

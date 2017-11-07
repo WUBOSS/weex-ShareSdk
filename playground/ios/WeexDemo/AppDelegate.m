@@ -7,6 +7,7 @@
  */
 
 #import "AppDelegate.h"
+#import "WeexAliPayModule.h"
 #import "WXDemoViewController.h"
 #import "UIViewController+WXDemoNaviBar.h"
 #import "WXEventModule.h"
@@ -33,7 +34,7 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     [self initWeexSDK];
-    
+    [WXSDKEngine registerModule:@"WeexAlipay" withClass:[WeexAliPayModule class]];
     self.window.rootViewController = [[WXRootViewController alloc] initWithRootViewController:[self demoController]];
     [self.window makeKeyAndVisible];
     
@@ -246,6 +247,19 @@
             break;
     }
     [alertView dismissWithClickedButtonIndex:buttonIndex animated:YES];
+}
+-(BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
+{
+    [WeexAliPayModule handleOpenURL:url];
+    return YES;
+    
+}
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+   [WeexAliPayModule handleOpenURL:url];
+    return YES;
 }
 
 @end

@@ -23,23 +23,26 @@ WX_EXPORT_METHOD(@selector(share:callback:))
 WX_EXPORT_METHOD(@selector(getUserInfo:callback:))
 - (void)getUserInfo:(NSString *)param callback:(WXModuleCallback)callback
 {
+    [ShareSDK cancelAuthorize:param.intValue];
     [ShareSDK getUserInfo:param.intValue
            onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error) {
                if(state==SSDKResponseStateSuccess)
                {
-                   
+                   if(callback)
                    callback(@{@"state":@(state),@"user":user.rawData});
                    
                }
                else if (state==SSDKResponseStateFail)
               
                {
+                   if(callback)
                    callback(@{@"state":@(state),@"error":error.userInfo
                               });
                }
                
                else if (state==SSDKResponseStateCancel)
                {
+                   if(callback)
                    callback(@{@"state":@(state),@"error":error.userInfo});
                }
                
@@ -52,25 +55,25 @@ WX_EXPORT_METHOD(@selector(getUserInfo:callback:))
     if(![param objectForKey:@"WeiXinAppKey"])
     {
         if(self.callBack)
-        self.callBack(@{@"status":@"error",@"msg":@"微信WeiXinAppKey参数没有"},YES);
+        self.callBack(@{@"status":@"error",@"msg":@"微信WeiXinAppKey参数没有"},NO);
       
     }
     if(![param objectForKey:@"WeiXinAppSecret"])
     {
         if(self.callBack)
-        self.callBack(@{@"status":@"error",@"msg":@"微信WeiXinAppSecret参数没有"},YES);
+        self.callBack(@{@"status":@"error",@"msg":@"微信WeiXinAppSecret参数没有"},NO);
      
     }
     if(![param objectForKey:@"QQAppKey"])
     {
         if(self.callBack)
-        self.callBack(@{@"status":@"error",@"msg":@"QQAppKey参数没有"},YES);
+        self.callBack(@{@"status":@"error",@"msg":@"QQAppKey参数没有"},NO);
       
     }
     if(![param objectForKey:@"QQAppSecret"])
     {
         if(self.callBack)
-        self.callBack(@{@"status":@"error",@"msg":@"QQAppSecret参数没有"},YES);
+        self.callBack(@{@"status":@"error",@"msg":@"QQAppSecret参数没有"},NO);
         
     }
     [ShareSDK registerActivePlatforms:@[@(SSDKPlatformSubTypeWechatSession),@(SSDKPlatformSubTypeWechatTimeline),@(SSDKPlatformSubTypeQQFriend)] onImport:^(SSDKPlatformType platformType) {
@@ -126,17 +129,18 @@ WX_EXPORT_METHOD(@selector(getUserInfo:callback:))
                        switch (state) {
                            case SSDKResponseStateSuccess:
                            {
-                               if(self.callBack)
+                               if(callback)
                                callback(@{@"status":@"success"});
                                break;
                            }
                            case SSDKResponseStateFail:
                            {
-                               if(self.callBack)
+                               if(callback)
                                 callback(@{@"status":@"error",@"msg":[NSString stringWithFormat:@"%@",error]});
                                break;
                            }
                            case SSDKResponseStateCancel:
+                               if(callback)
                                callback(@{@"status":@"cancel",@"msg":@"取消"});
                                break;
                            default:
